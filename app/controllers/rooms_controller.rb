@@ -8,6 +8,6 @@ class RoomsController < ApplicationController
 	# private
 
 	# def set_q
-	# 	@q = Room.ransack(params[:q])
+  # 	@q = Room.ransack(params[:q])
 	# end
 end
