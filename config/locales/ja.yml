@@ -3,3 +3,7 @@ ja:
     formats:
       default: "%y/%m/%d"
       long: "%Y/%m/%d %H:%M"
+
+  errors:
+    format: "%{attribute}%{message}"
+      blank: "を入力してください"

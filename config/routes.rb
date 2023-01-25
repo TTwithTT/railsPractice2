@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       sessions: "users/sessions"
     }
   
-  resources :users
+  get "users/profile" => "users#show"
+  get "users/profile/edit" => "users#edit" 
   resources :rooms do
     resources :reservations
   end
