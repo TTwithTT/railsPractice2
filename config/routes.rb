@@ -13,12 +13,13 @@ Rails.application.routes.draw do
       sessions: "users/sessions"
     }
   
-  get "users/profile" => "users#show"
+  get "users/profile" => "users#profile"
   get "users/profile/edit" => "users#edit" 
+  get "users/account" => "users#account"
+  get "users/account/edit" => "users/registrations#edit"
+  get "reservations/confirm" => "reservations#confirm"
   resources :rooms do
     resources :reservations
   end
-
-
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

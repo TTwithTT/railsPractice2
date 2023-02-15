@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
 
-	def show
+	def pofile
+		@user = current_user
+	end
+
+	def account
 		@user = current_user
 	end
 
