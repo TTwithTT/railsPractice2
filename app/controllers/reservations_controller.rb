@@ -5,10 +5,12 @@ class ReservationsController < ApplicationController
 
 	def confirm
 		@reservations = Reservation.new(reservation_params)
+		@room = Room.find(params[:id])
 	end
 	
 	def create
 		@reservation = Reservation.new(reservation_params)
+		@room = Room.find(params[:id])
 		if params[:back]
 			redirect_back(fallback_location: root_path) 
 		end
