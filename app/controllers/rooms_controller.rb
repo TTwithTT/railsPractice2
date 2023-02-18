@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-	before_action :set_room, only: [:show. :edit, :update, :destroy]
-	before_action :set_q, only: [:index, :search]
+	before_action :set_room, only: [:show, :edit, :update, :destroy]
+	before_action :set_q, only: [:index]
 
 	def index
 		@rooms = Room.all
@@ -43,11 +43,7 @@ class RoomsController < ApplicationController
 	end
 
 	def own
-		@rooms = Room.find_by(:user_id current_user.id)
-	end
-
-	def search
-		@results = @q.result
+		@rooms = current_user.rooms
 	end
 
 	private
@@ -63,4 +59,5 @@ class RoomsController < ApplicationController
 	def room_params
 		params.require(:room).permit(:name, :description, :price, :address, :image)
 	end
+
 end
