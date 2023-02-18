@@ -13,13 +13,14 @@ Rails.application.routes.draw do
       sessions: "users/sessions"
     }
   
+  root "top#index"
   get "users/profile" => "users#profile"
   get "users/profile/edit" => "users#edit" 
   get "users/account" => "users#account"
   get "users/account/edit" => "users/registrations#edit"
-  get "reservations/confirm" => "reservations#confirm"
   resources :rooms do
     resources :reservations
+    match "reservations/confirm", to: "reservations#new", via: "post"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

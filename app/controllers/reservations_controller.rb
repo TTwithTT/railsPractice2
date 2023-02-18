@@ -1,11 +1,11 @@
 class ReservationsController < ApplicationController
 	def index
-		@reservations = Reservation.all
+		@reservations = Reservation.find_by(user_id: current_user.id)
 	end
 
-	def confirm
-		@reservations = Reservation.new(reservation_params)
-		@room = Room.find(params[:id])
+	def new
+		@reservation = Reservation.new(reservation_params)
+		@room = Room.find(params[:room_id])
 	end
 	
 	def create
@@ -14,7 +14,6 @@ class ReservationsController < ApplicationController
 		if params[:back]
 			redirect_back(fallback_location: root_path) 
 		end
-
 		respond_to do |format|
 			if @reservation.save
 				redirect_to :reservations

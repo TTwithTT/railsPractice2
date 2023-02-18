@@ -17,7 +17,7 @@ class RoomsController < ApplicationController
 	end
 
 	def create
-		@room = Room.new(user_id: current_user.id, room_params)
+		@room = Room.new(room_params).merge(user_id: current_user.id)
 		if @room.save
 			flash[:notice] = "物件情報を登録しました"
 			redirect_to :back
@@ -43,7 +43,7 @@ class RoomsController < ApplicationController
 	end
 
 	def own
-		@rooms = Room.find(:user_id current_user.id)
+		@rooms = Room.find_by(:user_id current_user.id)
 	end
 
 	def search

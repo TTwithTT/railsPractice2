@@ -11,6 +11,18 @@
   </head>
 
   <body>
+    <header>
+      <h1>ReasevationApp</h1>
+      <% if logged_in? %>
+        <%# onclick menu %>
+      <% else %>
+        <% render "/login" %>
+        <% render "singup" %>
+      <% end %>
+    </header>
+    <% flash.each do |message_type, message| %>
+      <%= message %>
+    <% end %>
     <%= yield %>
   </body>
 </html>
