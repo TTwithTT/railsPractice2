@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
 	before_action :set_room, only: [:show, :edit, :update, :destroy]
-	before_action :set_q, only: [:index]
+	before_action :search, only: [:index]
 
 	def index
 		@rooms = Room.all
@@ -52,8 +52,9 @@ class RoomsController < ApplicationController
 		@room = Room.find(params[:id])
 	end
 	
-	def set_q
+	def search
     @q = Room.ransack(params[:q])
+		@results = @q.result
 	end
 
 	def room_params

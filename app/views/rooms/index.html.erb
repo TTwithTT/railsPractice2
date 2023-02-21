@@ -1,0 +1,18 @@
+<%= search_form_for @q do |f| %>
+	<%= f.label :area, 'エリア' %>
+	<%= f.search_field :address_cont %>
+	<%= f.label :free_word, 'フリーワード' %>
+	<%= f.search_field :name_or_description_cont %>
+	<%= f.submit "検索"%>
+<% end %>
+
+<%= @rooms.count %>
+
+<%= @rooms.each do |room| %>
+	<%= room.image %>
+	<%= room.name %>
+	<%= room.address %>
+	<%= room.description %>
+	<%= room.price %>
+	<%= link_to "詳細はこちら", room %>
+<% end %>

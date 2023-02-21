@@ -4,7 +4,6 @@ class TopController < ApplicationController
 	def index
 	end
 
-
 	private
 	
 	def set_q
