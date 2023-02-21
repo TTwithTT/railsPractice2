@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :rooms do
     resources :reservations
-    match "reservations/confirm", to: "reservations#new", via: "post"
+    match "reservations/confirm", to: "reservations#confirm", via: "post"
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
