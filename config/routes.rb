@@ -14,10 +14,13 @@ Rails.application.routes.draw do
     }
   
   root "top#index"
+  
   get "users/profile" => "users#profile"
   get "users/profile/edit" => "users#edit" 
   get "users/account" => "users#account"
   get "users/account/edit" => "users/registrations#edit"
+  get "rooms/own" => "rooms#own"
+
   resources :rooms do
     resources :reservations
     match "reservations/confirm", to: "reservations#new", via: "post"

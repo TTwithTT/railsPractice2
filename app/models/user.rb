@@ -13,4 +13,6 @@ class User < ApplicationRecord
   # validates :introductionj, presence: true
 
   has_many :reservations, dependent: :destroy
+
+  mount_uploader :avatar, AvatarUploader
 end

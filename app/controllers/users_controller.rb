@@ -14,10 +14,15 @@ class UsersController < ApplicationController
 
 	def update
 		@user = current_user
-		if @user.update(params.require(:user).permit(:name, :introduction))
+		if @user.update(user_params)
 			flash[:notice] = "プロフィールを更新しました"
-			redirect_to :back
+			redirect_to root_path
 		else
 			render "edit"	
 		end
+
+	private
+	def user_params
+		params.require(:user).permit(:name, :introduction, :avatar)
+	end
 end

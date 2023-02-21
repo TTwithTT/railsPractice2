@@ -1,0 +1,10 @@
+<%= @rooms.each do |room| %>
+	<%= image_tag room.avatar.url %>
+	<%= room.name %>
+	<%= room.description %>
+	<%= room.price %>
+	<%= room.created_at %>
+	<%= link_to '編集', [:edit, room] %>
+	<%= link_to '削除', room, method: :delete, data: { confirm: '削除しますか？'} %>
+<% end %>
+
