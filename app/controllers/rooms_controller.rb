@@ -28,7 +28,7 @@ class RoomsController < ApplicationController
 	end
 
 	def update
-		if @roomj.update(room_params)
+		if @room.update(room_params)
 			flash[:notice] = "物件情報を編集しました"
 			redirect_to :back
 		else

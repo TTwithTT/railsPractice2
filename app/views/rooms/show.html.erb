@@ -21,21 +21,22 @@
       <div class="room-show-reservation">
         <div class="reservation-flex">
           <p>¥<%= @room.price %>/日</p>
-          <%= form_with url: new_room_reservation_path(@room), local: true do |f| %>
+          <%= form_with(model: post, local: true, url: {action: 'confirm'}) do |f| %>
+          <%= f.hidden_field :room_id, value: @room.id %>
             <div class="form-group">
               <%= f.label :fromDate, '開始日' %>
-              <%= f.date_field :fromDate, autofocus: true, class: 'form-control' %>
+              <%= f.date_field :fromDate %>
             </div>
             <div class="form-group">
               <%= f.label :toDate, '終了日' %>
-              <%= f.date_field :toDate, class: 'form-control' %>
+              <%= f.date_field :toDate %>
             </div>
             <div class="form-group">
               <%= f.label :numberOfGuests, '宿泊人数' %>
-              <%= f.number_field :numberOfGuests, class: 'form-control' %>
+              <%= f.number_field :numberOfGuests %>
             </div>
             <div>
-              <%= f.submit '予約する', class: 'btn btn-primary btn-block text-center' %>
+              <%= f.submit '予約する', name: 'new' class: 'btn btn-primary btn-block text-center' %>
             </div>
           <% end %>
         </div>
