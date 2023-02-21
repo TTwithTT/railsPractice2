@@ -1,0 +1,27 @@
+<div class="room-detail">
+  <div class="room-image">
+    <% if @reservation.room.avatar? %>
+      <%= image_tag @reservation.room.avatar.url %>
+    <% else %>
+      <%# <%= %> %>
+    <% end %>
+  </div>
+  <div class="room-show-profile">
+    <div>
+      <h3><%= @reservation.room.name %></h3>
+      <p><%= @reservation.room.address %></p>
+    </div>
+  </div>
+  <p class='room-show-introduction'><%= @reservation.room.description %></p>
+</div>
+
+<%= form_with model: @reservation do |f| %>
+  <%= f.label :fromDate, '開始日' %>
+  <%= f.date_field :fromDate %>
+  <%= f.label :toDate, '終了日' %>
+  <%= f.date_field :toDate %>
+  <%= f.label :numberOfGuests '人数' %>
+  <%= f.number_field :numberOfGuests %>
+  <%= f.submit '再予約' %>
+  <%= link_to 'キャンセル', :reservations %>
+<% end %>

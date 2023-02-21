@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
 	def index
-		@reservations = Reservation.find_by(user_id: current_user.id)
+		@reservations = current_user.reservations
 	end
 
 	def new
@@ -23,8 +23,8 @@ class ReservationsController < ApplicationController
 	end
 
 	private
-	# def reservation_params
-	# 	params.require(:reservation).permit(:etc).merge(user_id: current_user.id)
-	# end
+	def reservation_params
+		params.require(:reservation).permit(:etc).merge(user_id: current_user.id)
+	end
 
 end
