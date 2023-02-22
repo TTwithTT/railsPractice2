@@ -14,10 +14,14 @@
     <header>
       <h1>ReasevationApp</h1>
       <% if user_signed_in? %>
-        <%# onclick menu %>
+        <%= link_to "施設の新規登録", new_room_path %>
+        <%= link_to "予約済み一覧", reservations_path %>
+        <%= link_to "登録済み一覧", own_rooms_path %>
+        <%= link_to "アカウント設定", users_account_path%>
+        <%= link_to "ログアウト", destroy_user_session_path %>
       <% else %>
-        <%= link_to "ログイン", new_user_session_path, class: 'post' %>
-        <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+        <%= link_to "ログイン", new_user_session_path %>
+        <%= link_to "新規登録", new_user_registration_path %>
       <% end %>
     </header>
     <% flash.each do |message_type, message| %>

@@ -1,5 +1,5 @@
 <%= @reservations.each do |reservation| %>
-	<%= image_tag reservation.room.avatar.url %>
+	<%# <%= image_tag reservation.room.image.url %> %>
 	<%= link_to reservation.room.name, reservation.room %>
 	<%= reservation.room.description %>
 	<%= reservation.totalAmoutOfPrice %>

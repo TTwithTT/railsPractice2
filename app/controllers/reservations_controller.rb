@@ -1,4 +1,6 @@
 class ReservationsController < ApplicationController
+	before_action :authenticate_user!
+
 	def index
 		@reservations = current_user.reservations
 	end
@@ -7,36 +9,44 @@ class ReservationsController < ApplicationController
 		@reservation = Reservation.find(params[:id])
 	end
 
-	def confirm
-		if params[:new]
-			@reservation = Reservation.new(reservation_params)
-			redirect_to :back if @reservation.invalid?
-		else
-			@reservation = Reservation.find(params[:id])
-			redirect_to :back if @reservation.invalid?
+	def new_confirm
+		@reservation = Reservation.new(reservation_params)
+		@reservation.user_id = current_user.id
+		@room = @reservation.room
+		# redirect_back(fallback_location: root_path) if @reservation.invalid?
 	end
 	
 	def create
 		@reservation = Reservation.new(reservation_params)
-		@room = Room.find(params[:id])
+		@reservation.user_id = current_user.id
 		if params[:back]
-			redirect_back(fallback_location: root_path) 
-		end
-		if @reservation.save
+			flash[:notice] = "キャンセルしました"
+			redirect_back(fallback_location: root_path)
+		elsif @reservation.save
+			flash[:notice] = "予約しました"
 			redirect_to :reservations
 		else
+			flash[:notice] = "予約できませんでした"
 			redirect_to :rooms
 		end
 	end
 
 	def update
 		@reservation = Reservation.find(params[:id])
-		@reservation.update(reservation_params)
+		if params[:back]
+			flash[:notice] = "キャンセルしました"
+			redirect_back(fallback_location: root_path)
+		elsif @reservation.update(reservation_params)
+			flash[:notice] = "再予約しました"
+			redirect_to :reservations
+		else
+			flash[:notice] = "予約できませんでした"
+			redirect_to :reservations
+		end
 	end
 
 	private
 	def reservation_params
-		params.require(:reservation).permit(:fromDate, :toDate, :numberOfGuests, :room_id).merge(user_id: current_user.id)
+		params.require(:reservation).permit(:fromDate, :toDate, :numberOfGuests, :room_id)
 	end
-
 end

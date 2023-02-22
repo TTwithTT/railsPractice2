@@ -19,11 +19,20 @@ Rails.application.routes.draw do
   get "users/profile/edit" => "users#edit" 
   get "users/account" => "users#account"
   get "users/account/edit" => "users/registrations#edit"
-  get "rooms/own" => "rooms#own"
 
   resources :rooms do
-    resources :reservations
-    match "reservations/confirm", to: "reservations#confirm", via: "post"
+    collection do
+      get :own
+    end
+  end
+
+  resources :reservations do
+    member do
+      post :edit_confirm
+    end
+    collection do
+      post :new_confirm
+    end
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

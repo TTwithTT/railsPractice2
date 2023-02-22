@@ -14,5 +14,5 @@ class User < ApplicationRecord
 
   has_many :reservations, dependent: :destroy
 
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :image, ImageUploader
 end

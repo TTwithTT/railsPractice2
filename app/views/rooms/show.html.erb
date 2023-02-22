@@ -3,10 +3,10 @@
     <div class="room-show-inner">
       <div class="room-detail">
         <div class="room-image">
-        <% if @room.avatar? %>
-          <%= image_tag @room.avatar.url %>
+        <% if @room.image? %>
+          <%= image_tag @room.image.url %>
         <% else %>
-          <%# <%= %> %>
+          <%# <%= imgage_tag ('noavatar.png') %> %>
         <% end %>
         </div>
         <div class="room-show-profile">
@@ -21,7 +21,8 @@
       <div class="room-show-reservation">
         <div class="reservation-flex">
           <p>¥<%= @room.price %>/日</p>
-          <%= form_with(model: post, local: true, url: {action: 'confirm'}) do |f| %>
+
+          <%= form_with model: Reservation.new, local: true, url: new_confirm_reservations_path do |f| %>
           <%= f.hidden_field :room_id, value: @room.id %>
             <div class="form-group">
               <%= f.label :fromDate, '開始日' %>
@@ -36,7 +37,7 @@
               <%= f.number_field :numberOfGuests %>
             </div>
             <div>
-              <%= f.submit '予約する', name: 'new' class: 'btn btn-primary btn-block text-center' %>
+              <%= f.submit "予約する" %>
             </div>
           <% end %>
         </div>

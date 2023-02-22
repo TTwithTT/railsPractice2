@@ -15,7 +15,7 @@
   <p class='room-show-introduction'><%= @room.description %></p>
 </div>
 
-<%= form_with(model: post, local: true, url: {action: 'confirm'}) do |f| %>
+<%= form_withform_with url: reservations_confirm_path do |f| %>
   <%= f.label :fromDate, '開始日' %>
   <%= f.date_field :fromDate %>
   <%= f.label :toDate, '終了日' %>

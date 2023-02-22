@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
 	end
 
 	def new
-		@schedule = Schedule.new
+		@room = Room.new
 	end
 
 	def show
@@ -17,10 +17,11 @@ class RoomsController < ApplicationController
 	end
 
 	def create
-		@room = Room.new(room_params).merge(user_id: current_user.id)
+		@room = Room.new(room_params)
+		@room.user_id = current_user.id
 		if @room.save
 			flash[:notice] = "物件情報を登録しました"
-			redirect_to :back
+			redirect_to :rooms
 		else
 			flash[:notice] = "物件情報を登録できませんでした"
 			render "new", status: :unprocessable_entity
@@ -28,9 +29,10 @@ class RoomsController < ApplicationController
 	end
 
 	def update
+		@room = Room.find(params[:id])
 		if @room.update(room_params)
 			flash[:notice] = "物件情報を編集しました"
-			redirect_to :back
+			redirect_back(fallback_location: root_path)
 		else
 			render "edit"
 		end
@@ -39,7 +41,7 @@ class RoomsController < ApplicationController
 	def destroy
 		@schedule.destroy
 		flash[:notice] = "物件情報を削除しました"
-		redirect_to :back
+		redirect_back(fallback_location: root_path)
 	end
 
 	def own
@@ -58,7 +60,7 @@ class RoomsController < ApplicationController
 	end
 
 	def room_params
-		params.require(:room).permit(:name, :description, :price, :address, :avatar)
+		params.require(:room).permit(:name, :description, :price, :address, :image)
 	end
 
 end
