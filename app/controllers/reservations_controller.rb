@@ -53,6 +53,7 @@ class ReservationsController < ApplicationController
 	end
 
 	def destroy
+		reservation = Reservation.find(params[:id])
 		reservation.destroy
 		flash[:notice] = "予約をキャンセルしました"
 		redirect_back(fallback_location: root_path)
