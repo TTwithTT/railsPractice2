@@ -6,19 +6,24 @@ Rails.application.routes.draw do
       sign_up: '',
       sign_in: 'login',
       sign_out: 'logout',
-      registration: "signup",
+      registration: 'signup', 
     },
     controllers: {
-      registrations: "users/registrations",
-      sessions: "users/sessions"
+      registrations: 'users/registrations',
+      sessions: 'users/sessions'
     }
-  
-  root "top#index"
-  
-  get "users/profile" => "users#profile"
-  get "users/profile/edit" => "users#edit" 
-  get "users/account" => "users#account"
-  get "users/account/edit" => "users/registrations#edit"
+  devise_scope :user do
+    get 'users/account/edit' => 'users/registrations#edit'
+  end
+
+  root 'top#index'
+
+  resources :users, only: [:edit, :update] do
+    member do
+      get :account
+      get :profile
+    end
+  end
 
   resources :rooms do
     collection do

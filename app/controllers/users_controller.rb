@@ -1,27 +1,39 @@
 class UsersController < ApplicationController
+	# before_action :set_user, only: [:account, :profile, :edit, :update]
+	before_action :set_user, only: [:account, :profile, :edit]
+	before_action :set_current_user, only: [:update]
 
-	def pofile
-		@user = current_user
-	end
 
 	def account
-		@user = current_user
+	end
+
+	def pofile
 	end
 
 	def edit
-		@user = current_user
+		unless @user == current_user
+			redirect_to profile_user_path(current_user)
+		end
 	end
 
 	def update
-		@user = current_user
-		if @user.update(user_params)
+		if current_user.update(user_params)
 			flash[:notice] = "プロフィールを更新しました"
-			redirect_to root_path
+			redirect_to profile_user_path
 		else
-			render "edit"	
+			redirect_to edit_user_path
 		end
+	end
 
 	private
+	def set_current_user
+		@user = current_user
+	end
+
+	def set_user
+		@user = User.find(params[:id])
+	end
+
 	def user_params
 		params.require(:user).permit(:name, :introduction, :image)
 	end

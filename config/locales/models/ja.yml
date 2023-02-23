@@ -1,6 +1,24 @@
 ja:
   activerecord:
-    attribute:
+    models:
+      user: ユーザー
+      room: 物件
+      reservation: 予約
+    attributes:
       user:
+        email: メールアドレス
+        name: ユーザーネーム
+        image: アイコン
+        introduction: 紹介
       room:
+        name: 物件名
+        image: イメージ
+        address: アドレス
+        description: 概要
+        price: 価格
       reservation:
+        fromDate: チェックイン
+        toDate: チェックアウト
+        numberOfGuests: 人数
+
+
