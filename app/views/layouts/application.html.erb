@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
   <body>
     <header>
       <h1>ReasevationApp</h1>
       <% if user_signed_in? %>
+        <% if @user.image? %>
+          <%= image_tag @user.image.url %>
+        <% else %>
+          <%= image_tag 'noicon.png' %>
+        <% end %>
         <%= link_to "施設の新規登録", new_room_path %>
         <%= link_to "予約済み一覧", reservations_path %>
         <%= link_to "登録済み一覧", own_rooms_path %>
