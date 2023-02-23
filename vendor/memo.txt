@@ -1,0 +1,21 @@
+User
+	email
+	password
+	name
+	image
+	introduction
+
+Room
+	name
+	description	
+	price
+	address
+	image
+
+Reservaion
+	User
+	Room
+	fromDate
+	toDate
+	numberOfGuests
+	totalAmountOfPrice

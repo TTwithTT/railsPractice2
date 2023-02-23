@@ -1,0 +1,11 @@
+<% if @user.image? %>
+	<%= image_tag @user.image.url %>
+<% else %>
+	<%= image_tag 'noicon.png' %>
+<% end %>
+
+<%= @user.name %>
+<%= @user.introduction %>
+
+<%= link_to '編集する', edit_user_path(@user.id) %>
+<%= link_to 'アカウント情報', account_user_path(current_user.id) %>

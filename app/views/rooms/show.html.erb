@@ -1,0 +1,47 @@
+<div class='wrapper'>
+  <div class="room-show">
+    <div class="room-show-inner">
+      <div class="room-detail">
+        <div class="room-image">
+        <% if @room.image? %>
+          <%= image_tag @room.image.url %>
+        <% else %>
+          <%= image_tag 'noimage.png' %>
+        <% end %>
+        </div>
+        <div class="room-show-profile">
+          <div>
+            <h3><%= @room.name %></h3>
+            <p><%= @room.address %></p>
+          </div>
+        </div>
+        <p class='room-show-introduction'><%= @room.description %></p>
+      </div>
+
+      <div class="room-show-reservation">
+        <div class="reservation-flex">
+          <p>¥<%= @room.price %>/日</p>
+
+          <%= form_with model: Reservation.new, local: true, url: new_confirm_reservations_path do |f| %>
+          <%= f.hidden_field :room_id, value: @room.id %>
+            <div class="form-group">
+              <%= f.label :fromDate, '開始日' %>
+              <%= f.date_field :fromDate %>
+            </div>
+            <div class="form-group">
+              <%= f.label :toDate, '終了日' %>
+              <%= f.date_field :toDate %>
+            </div>
+            <div class="form-group">
+              <%= f.label :numberOfGuests, '宿泊人数' %>
+              <%= f.number_field :numberOfGuests %>
+            </div>
+            <div>
+              <%= f.submit "予約する" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

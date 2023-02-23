@@ -1,0 +1,10 @@
+<%= form_with model: @user, local: true do |f| %>
+	<%= f.label :image ,'アイコン' %>
+	<%= f.file_field :image %>
+	<%= f.label :name ,'ユーザーネーム' %>
+	<%= f.text_field :name %>
+	<%= f.label :introduction ,'紹介' %>
+	<%= f.text_area :introduction %>
+	<%= f.submit 'プロフィールを編集する' %>
+	<%= link_to '戻る', profile_user_path %>
+<% end %>

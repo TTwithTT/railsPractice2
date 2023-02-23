@@ -1,0 +1,31 @@
+<div class="wrapper">
+  <div class="reservation-new">
+    <div class="reservation-new-inner">
+      <h2>予約内容確認</h2>
+      <%= form_with model: Reservation.new do |f| %>
+        <div class="form-group">
+          <%= @reservation.fromDate %>
+        </div>
+        <div class="form-group">
+          <%= @reservation.toDate %>
+        </div>
+        <p class='room-date'>使用日数：<%= ((@reservation.toDate - @reservation.fromDate) / 86400).floor() + 1 %> 日</p> 
+
+        <p class='room-people'>人数：<%= @reservation.numberOfGuests %>人</p>
+        <div class="form-group">
+          <%= @reservation.numberOfGuests * @room.price %>
+        </div>
+
+        <p class='confirmation'>上記内容でよろしければ「予約確定」を押してください</p>
+        <div class='check'>
+          <%= f.hidden_field :fromDate, value: @reservation.fromDate %>
+          <%= f.hidden_field :toDate, value: @reservation.toDate %>
+          <%= f.hidden_field :numberOfGuests, value: @reservation.numberOfGuests %>
+          <%= f.hidden_field :room_id, value: @reservation.room_id%>
+          <%= f.submit '予約を確定' %>
+          <%= link_to 'キャンセル', room_path(@room.id) %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
