@@ -21,7 +21,7 @@
         <%= link_to "予約済み一覧", reservations_path %>
         <%= link_to "登録済み一覧", own_rooms_path %>
         <%= link_to "アカウント設定", account_user_path(current_user.id) %>
-        <%= link_to "ログアウト", destroy_user_session_path %>
+        <%= button_to 'ログアウト', destroy_user_session_path, method: :delete %>
       <% else %>
         <%= link_to "ログイン", new_user_session_path %>
         <%= link_to "新規登録", new_user_registration_path %>

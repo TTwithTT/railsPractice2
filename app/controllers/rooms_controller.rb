@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
 		@room.user_id = current_user.id
 		if @room.save
 			flash[:notice] = "物件情報を登録しました"
-			redirect_to :own
+			redirect_to own_rooms_path
 		else
 			flash[:notice] = "物件情報を登録できませんでした"
 			render "new", status: :unprocessable_entity
