@@ -9,7 +9,7 @@
         <div class="form-group">
           <%= @reservation.toDate %>
         </div>
-        <p class='room-date'>使用日数：<%= ((@reservation.toDate - @reservation.fromDate) / 86400).floor() + 1 %> 日</p> 
+        <p class='room-date'>使用日数：<%= (@reservation.toDate - @reservation.fromDate).numerator日</p> %>
 
         <p class='room-people'>人数：<%= @reservation.numberOfGuests %>人</p>
         <div class="form-group">
@@ -22,7 +22,7 @@
           <%= f.hidden_field :toDate, value: @reservation.toDate %>
           <%= f.hidden_field :numberOfGuests, value: @reservation.numberOfGuests %>
           <%= f.hidden_field :room_id, value: @reservation.room_id%>
-          <%= f.submit '予約を確定' %>
+          <%= f.submit '再予約' %>
           <%= link_to 'キャンセル', room_path(@room.id) %>
         </div>
       <% end %>

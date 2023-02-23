@@ -9,7 +9,11 @@
 <%= @rooms.count %>
 
 <%= @rooms.each do |room| %>
-	<%= room.image %>
+  <% if room.image? %>
+    <%= image_tag room.image.url %>
+  <% else %>
+    <%= image_tag 'noimage.png' %>
+  <% end %>
 	<%= room.name %>
 	<%= room.address %>
 	<%= room.description %>

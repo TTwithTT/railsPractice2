@@ -7,8 +7,8 @@
 	<%= f.text_area :price %>
 	<%= f.label :address ,'住所' %>
 	<%= f.text_area :address %>
-	<%= f.label :avatar ,'画像' %>
-	<%= f.file_field :avatar %>
+	<%= f.label :image ,'画像' %>
+	<%= f.file_field :image %>
 	<%= f.submit '物件情報を編集する' %>
-	<%= link_to '登録物件一覧に戻る', users_rooms_path %>
+	<%= link_to '登録物件一覧に戻る', own_rooms_path %>
 <% end %>

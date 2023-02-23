@@ -6,7 +6,7 @@
         <% if @room.image? %>
           <%= image_tag @room.image.url %>
         <% else %>
-          <%# <%= imgage_tag ('noavatar.png') %> %>
+          <%= image_tag 'noimage.png' %>
         <% end %>
         </div>
         <div class="room-show-profile">

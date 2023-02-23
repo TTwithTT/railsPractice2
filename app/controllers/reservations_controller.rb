@@ -5,16 +5,13 @@ class ReservationsController < ApplicationController
 		@reservations = current_user.reservations
 	end
 
-	def edit
-		@reservation = Reservation.find(params[:id])
-	end
-
 	def new_confirm
 		@reservation = Reservation.new(reservation_params)
 		@reservation.user_id = current_user.id
 		@room = @reservation.room
-		# redirect_back(fallback_location: root_path) if @reservation.invalid?
+		redirect_back(fallback_location: root_path) if @reservation.invalid?
 	end
+
 	
 	def create
 		@reservation = Reservation.new(reservation_params)
@@ -31,6 +28,16 @@ class ReservationsController < ApplicationController
 		end
 	end
 
+	def edit
+		@reservation = Reservation.find(params[:id])
+	end
+
+	def edit_confirm
+		@reservation = Reservation.find(reservation_params)
+		@room = @reservation.room
+		redirect_back(fallback_location: root_path) if @reservation.invalid?
+	end
+
 	def update
 		@reservation = Reservation.find(params[:id])
 		if params[:back]
@@ -43,6 +50,12 @@ class ReservationsController < ApplicationController
 			flash[:notice] = "予約できませんでした"
 			redirect_to :reservations
 		end
+	end
+
+	def destroy
+		reservation.destroy
+		flash[:notice] = "予約をキャンセルしました"
+		redirect_back(fallback_location: root_path)
 	end
 
 	private

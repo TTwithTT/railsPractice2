@@ -1,9 +1,9 @@
 <div class="room-detail">
   <div class="room-image">
-    <% if @room.avatar? %>
-      <%= image_tag @room.avatar.url %>
+    <% if @room.image? %>
+      <%= image_tag room.image.url %>
     <% else %>
-      <%# <%= %> %>
+      <%= imgage_tag ('noimage.png') %>
     <% end %>
   </div>
   <div class="room-show-profile">
@@ -15,7 +15,7 @@
   <p class='room-show-introduction'><%= @room.description %></p>
 </div>
 
-<%= form_withform_with url: reservations_confirm_path do |f| %>
+<%= form_with @reservation, url: reservations_confirm_path do |f| %>
   <%= f.label :fromDate, '開始日' %>
   <%= f.date_field :fromDate %>
   <%= f.label :toDate, '終了日' %>

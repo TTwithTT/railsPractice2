@@ -1,5 +1,9 @@
 <%= @rooms.each do |room| %>
-	<%= image_tag room.avatar.url %>
+	<% if room.image? %>
+    <%= image_tag room.image.url %>
+  <% else %>
+    <%= image_tag 'noimage.png' %>
+  <% end %>
 	<%= room.name %>
 	<%= room.description %>
 	<%= room.price %>

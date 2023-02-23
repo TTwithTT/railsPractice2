@@ -1,11 +1,18 @@
 <%= @reservations.each do |reservation| %>
-	<%# <%= image_tag reservation.room.image.url %> %>
-	<%= link_to reservation.room.name, reservation.room %>
-	<%= reservation.room.description %>
-	<%= reservation.totalAmoutOfPrice %>
-	<%= reservation.fromDate %>
-	<%= reservation.toDate %>
-	<%= reservation.created_at %>
-	<%= link_to '編集', [:edit, reservation] %>
-	<%= link_to '削除', reservation, method: :delete, data: { confirm: '削除しますか？'} %>
+  <% room = reservation.room %>
+
+  <% if @room.image? %>
+    <%= image_tag room.image.url %>
+  <% else %>
+    <%= image_tag 'noimage.png' %>
+  <% end %>
+
+  <%= link_to room.name, room_path(room.id) %>
+  <%= room.description %>
+  <%= reservation.numberOfGuests * room.price %>
+  <%= reservation.fromDate %>
+  <%= reservation.toDate %>
+  <%= reservation.created_at %>
+  <%= link_to '再予約', [:edit, reservation] %>
+  <%= link_to '削除', reservation, method: :delete, data: { confirm: '削除しますか？'} %>
 <% end %>
