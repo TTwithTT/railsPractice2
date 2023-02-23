@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-	before_action :set_room, only: [:show, :edit, :update, :destroy]
+	before_action :set_room, only: [:show, :edit, :updat]
 	before_action :search, only: [:index]
 	before_action :authenticate_user!, only: [:own]
 
@@ -40,7 +40,8 @@ class RoomsController < ApplicationController
 	end
 	
 	def destroy
-		@room.destroy
+		room = Room.find(params[:id])
+		room.destroy
 		flash[:notice] = "物件情報を削除しました"
 		redirect_back(fallback_location: root_path)
 	end

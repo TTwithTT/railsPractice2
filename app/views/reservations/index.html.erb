@@ -1,7 +1,7 @@
 <%= @reservations.each do |reservation| %>
   <% room = reservation.room %>
 
-  <% if @room.image? %>
+  <% if room.image? %>
     <%= image_tag room.image.url %>
   <% else %>
     <%= image_tag 'noimage.png' %>

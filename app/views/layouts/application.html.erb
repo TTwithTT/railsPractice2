@@ -12,8 +12,8 @@
     <header>
       <h1>ReasevationApp</h1>
       <% if user_signed_in? %>
-        <% if @user.image? %>
-          <%= image_tag @user.image.url %>
+        <% if current_user.image? %>
+          <%= image_tag current_user.image.url %>
         <% else %>
           <%= image_tag 'noicon.png' %>
         <% end %>
